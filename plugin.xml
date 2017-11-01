@@ -15,7 +15,7 @@
     <!-- android -->
     <platform name="android">
 
-        <source-file src="src/android/ePOSPlugin.java" target-dir="src/epos/cordova" />
+        <source-file src="src/android/EPOSPrinter.java" target-dir="src/epos/cordova" />
         <source-file src="src/android/lib/ePOS-Print.jar" target-dir="libs" />
         <source-file src="src/android/lib/ePOSEasySelect.jar" target-dir="libs" />
       
