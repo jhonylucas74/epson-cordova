@@ -1,9 +1,9 @@
 
 var exec = require('cordova/exec');
 
-var PLUGIN_NAME = 'MyCordovaPlugin';
+var PLUGIN_NAME = 'ePOSPlugin';
 
-var MyCordovaPlugin = {
+var CordovaPlugin = {
   echo: function(phrase, cb) {
     exec(cb, null, PLUGIN_NAME, 'echo', [phrase]);
   },
@@ -12,4 +12,4 @@ var MyCordovaPlugin = {
   }
 };
 
-module.exports = MyCordovaPlugin;
+module.exports = CordovaPlugin;

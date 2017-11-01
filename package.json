@@ -1,11 +1,10 @@
 {
-  "name": "cordova-plugin-template",
+  "name": "cordova-epos-plugin",
   "version": "1.0.0",
   "cordova": {
     "id": "cordova-plugin-template",
     "platforms": [
-      "android",
-      "ios",
+      "android"
     ]
   },
   "description": "A starting point for a Cordova Plugin"
