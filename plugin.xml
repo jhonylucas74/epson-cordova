@@ -8,7 +8,7 @@
         <engine name="cordova" version=">=3.4.0"/>
     </engines>
 
-    <js-module src="www/ePOSPlugin.js" name="ePOSPrinter">
+    <js-module src="www/ePOSPlugin.js" name="ePOSPlugin">
         <clobbers target="window.plugins.EPOSPrinter" />
     </js-module>
 

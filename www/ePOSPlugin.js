@@ -1,7 +1,7 @@
 
 var exec = require('cordova/exec');
 
-var PLUGIN_NAME = 'ePOSPrinter';
+var PLUGIN_NAME = 'ePOSPlugin';
 
 var CordovaPlugin = {
   checkStatus: function(port, callback) {
