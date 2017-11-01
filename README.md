@@ -29,6 +29,9 @@ window.plugins.EPOSPrinter.portDiscovery(function(error, printerList){
 
 
 ### Check Printer status
+
+The format of port is ``192.168.192.168``.
+
 ```
 window.plugins.EPOSPrinter.checkStatus(port, function(error, result){
   if (error) {
@@ -42,7 +45,7 @@ window.plugins.EPOSPrinter.checkStatus(port, function(error, result){
 # Print receipt
 ## Builder
 
-note: the function ``printreceipt`` doesn't exists anymore. Now you need use ``Builder``
+to print you need use ``Builder``.
 
 To print a receipt you need create a builder with this code:
 ```
@@ -151,59 +154,4 @@ builder.print(portName, function(error, result){
 });
 ```
 
-### Connect and listen for hardware events (mPOP on iOS only)
-```
-window.plugins.starPrinter.connect(portName, function(error, result){
-  if (error) {
-    console.error(error);
-  } else {
-    console.log("connect finished");    
-  }
-});
-window.addEventListener('starIOPluginData', function (e) {
-  switch (e.dataType) {
-    case 'printerCoverOpen':
-      break;
-    case 'printerCoverClose':
-      break;
-    case 'printerImpossible':
-      break;
-    case 'printerOnline':
-      break;
-    case 'printerOffline':
-      break;
-    case 'printerPaperEmpty':
-      break;
-    case 'printerPaperNearEmpty':
-      break;
-    case 'printerPaperReady':
-      break;
-    case 'barcodeReaderConnect':
-      break;
-    case 'barcodeDataReceive':
-      break;
-    case 'barcodeReaderImpossible':
-      break;
-    case 'cashDrawerOpen':
-      break;
-    case 'cashDrawerClose':
-      break;
-  }
-});
-```
 
-### Open cash drawer (mPOP on iOS only)
-```
-window.plugins.starPrinter.openCashDrawer(name, function(error, result){
-  if (error) {
-    console.error(error);
-  } else {
-    console.log("openCashDrawer finished");
-  }
-});
-```
-
-[Demo application](https://github.com/InteractiveObject/StarIOPluginDemo)
-
-## License
-Copyright (c) 2016 [Interactive Object](https://www.interactive-object.com) . Licensed under the MIT license.

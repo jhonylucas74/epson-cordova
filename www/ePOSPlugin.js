@@ -10,6 +10,14 @@ var CordovaPlugin = {
     }, function(error){
       callback(error)
     }, PLUGIN_NAME, 'checkStatus', [port]);
+  },
+  portDiscovery: function (callback) {
+    exec(function (result) {
+      callback(null, result)
+    },
+    function (error) {
+      callback(error)
+    }, PLUGIN_NAME, 'portDiscovery', []);
   }
 };
 

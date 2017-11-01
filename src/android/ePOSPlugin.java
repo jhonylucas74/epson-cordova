@@ -40,8 +40,7 @@ public class ePOSPlugin extends CordovaPlugin {
       this.checkStatus(port);
       return true;
     }else if (action.equals("portDiscovery")) {
-      String port = args.getString(0);
-      // this.portDiscovery(port, callbackContext);
+      this.portDiscovery();
       return true;
     }else {
       //this.printReceipt(args, callbackContext);
@@ -49,7 +48,7 @@ public class ePOSPlugin extends CordovaPlugin {
     }
   }
 
-  public void checkStatus(String port) {
+  public void checkStatus(final String port) {
     // Run this in a thread for not stop all process.
     cordova.getThreadPool().execute(new Runnable() {
       public void run() {
@@ -57,7 +56,7 @@ public class ePOSPlugin extends CordovaPlugin {
 
         try {
           printer = new Print();
-          printer.openPrinter(Print.DEVTYPE_TCP, "192.168.192.168");
+          printer.openPrinter(Print.DEVTYPE_TCP, port);
 
           // A Sleep is used to get time for the socket to completely open
           try {
@@ -108,6 +107,39 @@ public class ePOSPlugin extends CordovaPlugin {
       }
     });
 
+  }
+
+  private void portDiscovery() {
+
+    JSONArray result = new JSONArray();
+    DeviceInfo[] mList = null;
+
+    try {
+      Finder.start(this.cordova.getActivity(), DevType.TCP, "255.255.255.255");
+      mList = Finder.getDeviceInfoList(FilterOption.PARAM_DEFAULT);
+
+      for (DeviceInfo discovery : mList) {
+        JSONObject port = new JSONObject();
+        port.put("deviceType", discovery.getDeviceType());
+        port.put("printerName", discovery.getPrinterName());
+        port.put("deviceName", discovery.getDeviceName());
+        port.put("ipAddress", discovery.getIpAddress());
+        port.put("macAddress", discovery.getMacAddress());
+
+        result.put(port);
+      }
+
+      Finder.stop();
+
+    } catch (EpsonIoException exception) {
+      _callbackContext.error(exception.getMessage());
+
+    } catch (JSONException e) {
+      e.printStackTrace();
+    } finally {
+      Log.d("Discovered devices : ", result.toString());
+      _callbackContext.success(result);
+    }
   }
 
 }
