@@ -37,20 +37,19 @@ public class EPOSPrinter extends CordovaPlugin {
 
     if (action.equals("checkStatus")) {
       String port = args.getString(0);
-      this.checkStatus(port);
+      this.checkStatus(port, callbackContext);
       return true;
     }else if (action.equals("portDiscovery")) {
       this.portDiscovery();
       return true;
     }else {
-      //this.printReceipt(args, callbackContext);
+      this.printReceipt(args);
       return true;
     }
   }
 
-  public void checkStatus(final String port) {
+  public void checkStatus(final String port, final CallbackContext callbackContext) {
 
-    final CallbackContext callbackContext = _callbackContext;
     // Run this in a thread for not stop all process.
     cordova.getThreadPool().execute(new Runnable() {
       public void run() {
@@ -67,6 +66,7 @@ public class EPOSPrinter extends CordovaPlugin {
             callbackContext.error("Problem with sleep in pool thread : " + e.getMessage());
             Thread.currentThread().interrupt();
           }
+
 
         } catch (EposException e) {
           callbackContext.error("Exception with ePOS : " + e.getMessage());
@@ -93,7 +93,8 @@ public class EPOSPrinter extends CordovaPlugin {
             callbackContext.success(json);
           } else {
             // unknown
-
+            json.put("unknown", true);
+            callbackContext.success(json);
           }
           // close printer.
           printer.closePrinter();
@@ -142,6 +143,11 @@ public class EPOSPrinter extends CordovaPlugin {
       Log.d("Discovered devices : ", result.toString());
       _callbackContext.success(result);
     }
+  }
+
+  private void printReceipt(JSONArray args)  throws JSONException {
+    JSONObject params = args.getJSONObject(0);
+    String port = params.getString("port");
   }
 
 }
