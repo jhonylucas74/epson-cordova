@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-    id="my-cordova-plugin"
-    version="1.0.0">
-    <name>ePOSPlugin/name>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="epos.cordova.eposplugin" version="1.0.0">
+    <name>ePOSPlugin</name>
     <description>pluging to use ePOS printer</description>
-    <license>MIT</license>
 
-    <js-module src="www/ePOSPugin.js" name="ePOSPrinter">
+    <engines>
+        <engine name="cordova" version=">=3.4.0"/>
+    </engines>
+
+    <js-module src="www/ePOSPlugin.js" name="ePOSPrinter">
         <clobbers target="window.plugins.EPOSPrinter" />
     </js-module>
 
@@ -20,7 +21,7 @@
       
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="ePOSPlugin">
-            <param name="android-package" value="epos.cordova.ePOSPlugin"/>
+                <param name="android-package" value="epos.cordova.ePOSPlugin"/>
             </feature>
         </config-file>
 

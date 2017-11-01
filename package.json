@@ -2,7 +2,7 @@
   "name": "cordova-epos-plugin",
   "version": "1.0.0",
   "cordova": {
-    "id": "cordova-plugin-template",
+    "id": "cordova-epos-plugin",
     "platforms": [
       "android"
     ]

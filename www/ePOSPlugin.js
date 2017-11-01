@@ -4,11 +4,12 @@ var exec = require('cordova/exec');
 var PLUGIN_NAME = 'ePOSPlugin';
 
 var CordovaPlugin = {
-  echo: function(phrase, cb) {
-    exec(cb, null, PLUGIN_NAME, 'echo', [phrase]);
-  },
-  getDate: function(cb) {
-    exec(cb, null, PLUGIN_NAME, 'getDate', []);
+  checkStatus: function(port, callback) {
+    exec(function(result){
+      callback(null, result);
+    }, function(error){
+      callback(error)
+    }, PLUGIN_NAME, 'checkStatus', [port]);
   }
 };
 
