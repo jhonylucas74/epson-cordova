@@ -20,8 +20,8 @@ import android.util.Log;
 
 import java.util.Date;
 
-public class ePOSPlugin extends CordovaPlugin {
-  private static final String TAG = "ePOSPlugin";
+public class EPOSPrinter extends CordovaPlugin {
+  private static final String TAG = "EPOSPrinter";
   private CallbackContext _callbackContext = null;
 
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
