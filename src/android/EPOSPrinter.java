@@ -49,6 +49,8 @@ public class EPOSPrinter extends CordovaPlugin {
   }
 
   public void checkStatus(final String port) {
+
+    final CallbackContext callbackContext = _callbackContext;
     // Run this in a thread for not stop all process.
     cordova.getThreadPool().execute(new Runnable() {
       public void run() {
@@ -62,12 +64,12 @@ public class EPOSPrinter extends CordovaPlugin {
           try {
             Thread.sleep(500);
           } catch (InterruptedException e) {
-            _callbackContext.error("Problem with sleep in pool thread : " + e.getMessage());
+            callbackContext.error("Problem with sleep in pool thread : " + e.getMessage());
             Thread.currentThread().interrupt();
           }
 
         } catch (EposException e) {
-          _callbackContext.error("Exception with ePOS : " + e.getMessage());
+          callbackContext.error("Exception with ePOS : " + e.getMessage());
           Thread.currentThread().interrupt();
         }
 
@@ -84,11 +86,11 @@ public class EPOSPrinter extends CordovaPlugin {
           if ((status[0] & Print.ST_OFF_LINE) != Print.ST_OFF_LINE) {
             // online
             json.put("online", true);
-            _callbackContext.success(json);
+            callbackContext.success(json);
           } else if ((status[0] & Print.ST_OFF_LINE) == Print.ST_OFF_LINE) {
             // offline
             json.put("offline", true);
-            _callbackContext.success(json);
+            callbackContext.success(json);
           } else {
             // unknown
 
@@ -96,7 +98,7 @@ public class EPOSPrinter extends CordovaPlugin {
           // close printer.
           printer.closePrinter();
         } catch (EposException e) {
-          _callbackContext.error("Exception with ePOS : " + e.getMessage());
+          callbackContext.error("Exception with ePOS : " + e.getMessage());
           Thread.currentThread().interrupt();
         } catch (JSONException e) {
           e.printStackTrace();
