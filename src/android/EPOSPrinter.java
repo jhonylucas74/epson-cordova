@@ -43,7 +43,8 @@ public class EPOSPrinter extends CordovaPlugin {
       this.portDiscovery();
       return true;
     }else {
-      this.printReceipt(args);
+      String port = args.getString(0);
+      this.printReceipt(port);
       return true;
     }
   }
@@ -145,9 +146,42 @@ public class EPOSPrinter extends CordovaPlugin {
     }
   }
 
-  private void printReceipt(JSONArray args)  throws JSONException {
-    JSONObject params = args.getJSONObject(0);
-    String port = params.getString("port");
+  private void printReceipt(final String port)  throws JSONException {
+    //JSONObject params = args.getJSONObject(0);
+    //final String port = params.getString("port");
+
+
+    Print printer = null;
+    int[] status = new int[1];
+    status[0] = 0;
+
+    try {
+      printer = new Print();
+      printer.openPrinter(Print.DEVTYPE_TCP, port);
+
+      //Initialize a Builder class instance
+      Builder builder = new Builder("TM-T88V", Builder.MODEL_ANK);
+      //Create a print document
+      builder.addTextLang(Builder.LANG_EN);
+      builder.addTextSmooth(Builder.TRUE);
+      builder.addTextFont(Builder.FONT_A);
+      builder.addTextSize(3, 3);
+      builder.addText("Hello,\t");
+      builder.addText("World!\n");
+      builder.addCut(Builder.CUT_FEED);
+
+      printer.sendData(builder, 10000, status);
+
+      if((status[0] & Print.ST_PRINT_SUCCESS) == Print.ST_PRINT_SUCCESS) {
+        builder.clearCommandBuffer();
+      }
+
+      printer.closePrinter();
+      _callbackContext.success("Printed");
+
+    } catch (EposException e) {
+      _callbackContext.error(e.getMessage());
+    }
   }
 
 }
