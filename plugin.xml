@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="epos.cordova.eposplugin" version="1.0.0">
-    <name>ePOSPlugin</name>
+    <name>ePOSPrinter</name>
     <description>pluging to use ePOS printer</description>
 
     <engines>
@@ -20,8 +20,8 @@
         <source-file src="src/android/lib/ePOSEasySelect.jar" target-dir="libs" />
       
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="ePOSPlugin">
-                <param name="android-package" value="epos.cordova.ePOSPlugin"/>
+            <feature name="EPOSPrinter">
+                <param name="android-package" value="epos.cordova.EPOSPrinter"/>
             </feature>
         </config-file>
 
