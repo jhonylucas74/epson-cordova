@@ -19,12 +19,12 @@ var CordovaPlugin = {
       callback(error)
     }, PLUGIN_NAME, 'portDiscovery', []);
   },
-  printTest: function(port, callback) {
+  printTest: function(port, texts, callback) {
     exec(function(result){
       callback(null, result);
     }, function(error){
       callback(error)
-    }, PLUGIN_NAME, 'printTest', [port]);
+    }, PLUGIN_NAME, 'printTest', [port, texts]);
   }
 };
 

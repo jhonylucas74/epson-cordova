@@ -44,7 +44,8 @@ public class EPOSPrinter extends CordovaPlugin {
       return true;
     }else {
       String port = args.getString(0);
-      this.printReceipt(port);
+      JSONArray texts = args.getJSONArray(1);
+      this.printReceipt(port, texts);
       return true;
     }
   }
@@ -146,7 +147,7 @@ public class EPOSPrinter extends CordovaPlugin {
     }
   }
 
-  private void printReceipt(final String port)  throws JSONException {
+  private void printReceipt(final String port, JSONArray texts)  throws JSONException {
     //JSONObject params = args.getJSONObject(0);
     //final String port = params.getString("port");
 
@@ -161,13 +162,12 @@ public class EPOSPrinter extends CordovaPlugin {
 
       //Initialize a Builder class instance
       Builder builder = new Builder("TM-T88V", Builder.MODEL_ANK);
-      //Create a print document
-      builder.addTextLang(Builder.LANG_EN);
-      builder.addTextSmooth(Builder.TRUE);
-      builder.addTextFont(Builder.FONT_A);
-      builder.addTextSize(3, 3);
-      builder.addText("Hello,\t");
-      builder.addText("World!\n");
+
+      for (int i = 0; i < texts.length(); i++) {
+        String text = texts.getString(i);
+        builder.addText(text + "\n");
+      }
+
       builder.addCut(Builder.CUT_FEED);
 
       printer.sendData(builder, 10000, status);
