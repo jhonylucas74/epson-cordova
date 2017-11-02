@@ -200,7 +200,7 @@ public class EPOSPrinter extends CordovaPlugin {
 
     private void printFromBuilder(JSONArray args, CallbackContext callbackContext) throws JSONException  {
         JSONObject params = args.getJSONObject(0);
-        String port = params.getString("port");
+        final String port = params.getString("port");
 
         Print printer = null;
         int[] status = new int[1];
@@ -210,11 +210,6 @@ public class EPOSPrinter extends CordovaPlugin {
             printer = new Print();
             printer.openPrinter(Print.DEVTYPE_TCP, port);
 
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                _callbackContext.error(e.getMessage());
-            }
 
             //Initialize a Builder class instance
             Builder builder = new Builder("TM-T88V", Builder.MODEL_ANK);
