@@ -152,9 +152,9 @@ public class EPOSPrinter extends CordovaPlugin {
 
             Finder.stop();
 
-        } catch (EpsonIoException exception) {
-            _callbackContext.error(exception.getMessage());
-
+        } catch (EpsonIoException e) {
+            Log.d("myapp", Log.getStackTraceString(e));
+            _callbackContext.error(e.getMessage());
         } catch (JSONException e) {
             e.printStackTrace();
         } finally {
@@ -201,6 +201,8 @@ public class EPOSPrinter extends CordovaPlugin {
     }
 
     private void printFromBuilder(final String port, JSONArray params) throws JSONException  {
+
+        Log.d("myapp", "Passei no Print From Builder");
         Print printer = null;
         int[] status = new int[1];
         status[0] = 0;
@@ -226,8 +228,10 @@ public class EPOSPrinter extends CordovaPlugin {
             _callbackContext.success("Printed");
 
         } catch (JSONException e) {
+            Log.d("myapp", Log.getStackTraceString(e));
             _callbackContext.error(e.getStackTrace().toString());
         } catch (EposException e) {
+            Log.d("myapp", Log.getStackTraceString(e));
             _callbackContext.error(e.getStackTrace().toString());
         }
 
@@ -274,7 +278,7 @@ public class EPOSPrinter extends CordovaPlugin {
                     Builder.PARAM_DEFAULT);
 
         } catch (EposException e) {
-
+            Log.d("myapp", Log.getStackTraceString(e));
         }
 
     }
@@ -342,6 +346,7 @@ public class EPOSPrinter extends CordovaPlugin {
             builder.addText(textToPrint);
 
         } catch (EposException e) {
+            Log.d("myapp", Log.getStackTraceString(e));
             _callbackContext.error(e.getStackTrace().toString());
         }
 
@@ -352,7 +357,7 @@ public class EPOSPrinter extends CordovaPlugin {
         try {
             builder.addPulse(Builder.DRAWER_1, Builder.PULSE_100);
         } catch (EposException e) {
-
+            Log.d("myapp", Log.getStackTraceString(e));
         }
     }
 
@@ -360,7 +365,7 @@ public class EPOSPrinter extends CordovaPlugin {
         try {
             builder.addCut(Builder.CUT_FEED);
         } catch (EposException e) {
-
+            Log.d("myapp", Log.getStackTraceString(e));
         }
     }
 
