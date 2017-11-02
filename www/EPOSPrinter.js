@@ -43,15 +43,16 @@ function Builder(options){
     }
 
     this.text = function(input, style){
-      var _style     = style          || {};
-      _style.size    = _style.size    || 4;
-      _style.color   = _style.color   || 'black';
-      _style.font    = _style.font    || 'FONT_A';
-      _style.weight  = _style.weight  || 'normal';
-      _style.align   = _style.align   || 'left';
-      _style.bgcolor = _style.bgcolor || 'white';
+      var _style     =  {};
+      _style.size    = style.size    || 4;
+      _style.color   = style.color   || 'black';
+      _style.font    = style.font    || 'FONT_A';
+      _style.weight  = style.weight  || 'normal';
+      _style.align   = style.align   || 'left';
+      _style.bgcolor = sstyle.bgcolor || 'white';
 
       var text = input ? input: '';
+      text = text + '\n';
 
       this.commands.push({
         type: 'text',
