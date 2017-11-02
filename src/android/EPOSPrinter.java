@@ -319,9 +319,11 @@ public class EPOSPrinter extends CordovaPlugin {
             String weight = style.getString("weight");
 
             if (weight.equals("bold")) {
-                builder.addTextDouble(Builder.TRUE, Builder.TRUE);
+                builder.addTextStyle(Builder.PARAM_UNSPECIFIED, Builder.PARAM_UNSPECIFIED,
+                        Builder.TRUE, Builder.PARAM_UNSPECIFIED);
             } else {
-                builder.addTextDouble(Builder.FALSE, Builder.FALSE);
+                builder.addTextStyle(Builder.PARAM_UNSPECIFIED, Builder.PARAM_UNSPECIFIED,
+                        Builder.PARAM_UNSPECIFIED, Builder.PARAM_UNSPECIFIED);
             }
 
             // size
