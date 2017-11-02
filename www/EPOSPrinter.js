@@ -94,9 +94,8 @@ function Builder(options){
     this.print = function(port, callback){
         var args = [{
             paperWidth: this.paperWidth,
-            port: port,
             commands: this.commands
-        }];
+        }, port];
 
         exec(function (result) {
             callback(null, result)
