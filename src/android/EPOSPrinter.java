@@ -35,9 +35,9 @@ public class EPOSPrinter extends CordovaPlugin {
     }
 
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
-        if(_callbackContext == null){
-            _callbackContext = callbackContext;
-        }
+
+        this._callbackContext = callbackContext;
+
 
         if (action.equals("checkStatus")) {
             String port = args.getString(0);
@@ -63,6 +63,8 @@ public class EPOSPrinter extends CordovaPlugin {
             this.printReceipt(port, texts);
             return true;
         }
+
+        return true;
     }
 
     public void checkStatus(final String port, final CallbackContext callbackContext) {
