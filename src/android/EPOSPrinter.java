@@ -18,6 +18,10 @@ import com.epson.easyselect.*;
 
 import android.util.Log;
 
+import android.graphics.Bitmap;
+import android.util.Base64;
+import android.graphics.BitmapFactory;
+
 import java.util.Date;
 
 public class EPOSPrinter extends CordovaPlugin {
@@ -42,7 +46,7 @@ public class EPOSPrinter extends CordovaPlugin {
         } else if (action.equals("portDiscovery")) {
             this.portDiscovery();
             return true;
-        } else if (action.equals("printFromBuilder")) {
+        } else if (action.esquals("printFromBuilder")) {
             this.printFromBuilder(args, callbackContext);
             return true;
         } else {
@@ -128,7 +132,7 @@ public class EPOSPrinter extends CordovaPlugin {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
-                _callbackContext.error(e.getMessage());
+                _callbackContext.error(exception.getMessage());
             }
 
             mList = Finder.getDeviceInfoList(FilterOption.PARAM_DEFAULT);
