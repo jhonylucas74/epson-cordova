@@ -46,7 +46,7 @@ public class EPOSPrinter extends CordovaPlugin {
         } else if (action.equals("portDiscovery")) {
             this.portDiscovery();
             return true;
-        } else if (action.esquals("printFromBuilder")) {
+        } else if (action.equals("printFromBuilder")) {
             this.printFromBuilder(args, callbackContext);
             return true;
         } else {
@@ -132,7 +132,7 @@ public class EPOSPrinter extends CordovaPlugin {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
-                _callbackContext.error(exception.getMessage());
+                _callbackContext.error(e.getMessage());
             }
 
             mList = Finder.getDeviceInfoList(FilterOption.PARAM_DEFAULT);
@@ -343,7 +343,7 @@ public class EPOSPrinter extends CordovaPlugin {
         builder.addPulse(Builder.DRAWER_1, Builder.PULSE_100);
     }
 
-    private void cutPaper() {
+    private void cutPaper(Builder builder) {
         builder.addCut(Builder.CUT_FEED);
     }
 
