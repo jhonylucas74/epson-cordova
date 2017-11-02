@@ -59,19 +59,19 @@ The width represent the paper width. With the instance of builder is possible no
 ```
 In example a text command was added in pipeline. the second argument is a object that represent a style of text. Below follow all the possible values.
 
-* ``size``  : ``int`` | size of text.
-* ``font``  : ``string`` |  font family: ``monospace``, ``sans serife``, ``serife`` or ``default``.
-* ``weight``  : ``string`` | weight of text: ``bold``, ``bold italic``, ``italic`` or ``normal``.
-* ``align``  : ``string`` | align of text: ``center``, ``opposite`` or ``normal``.
+* ``size``  : ``int`` | size of text, default is 4.
+* ``font``  : ``string`` |  font: ``FONT_A``, ``FONT_B``,``FONT_C``,``FONT_D``,``FONT_E``.
+* ``weight``  : ``string`` | weight of text: ``bold`` or ``normal``.
+* ``align``  : ``string`` | align of text: ``center``, ``right`` or ``left``.
 
 Example with default configuration of style.
 
 ```
   builder.text("Hello world", {
-    size: 15,
-    font: 'default',
+    size: 4,
+    font: 'FONT_A',
     weight: 'normal',
-    align: 'normal',
+    align: 'left',
   });
 ```
 
@@ -94,7 +94,7 @@ Example with shared style:
 
 ```
   var myStyle = {
-    size: 23,
+    size: 8,
     weight: 'bold',
     align: 'center'
   };
@@ -128,7 +128,9 @@ The second param is optional, but you can change the width anda the align when p
 
 Style image options: 
 * ``width``  : ``int`` | size of image.
-* ``align``  : ``string`` | align of image: ``center``, ``left`` or ``right``.
+* ``height``  : ``int`` | size of image.
+* ``x``  : ``int`` | x of image.
+* ``y``  : ``int`` | y of image.
 
 ### Cutpaper
 Cut the paper.
@@ -136,7 +138,6 @@ Cut the paper.
   builder.cutPaper();
 ```
 ### Open Cash Drawer
-I'm not sure if this work with TSP100.
 ```
   builder.openCashDrawer();
 ```
