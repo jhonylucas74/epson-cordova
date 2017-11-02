@@ -92,10 +92,7 @@ function Builder(options){
     }
 
     this.print = function(port, callback){
-        var args = [{
-            paperWidth: this.paperWidth,
-            commands: this.commands
-        }, port];
+        var args = [this.commands, port];
 
         exec(function (result) {
             callback(null, result)

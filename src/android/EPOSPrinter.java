@@ -47,7 +47,7 @@ public class EPOSPrinter extends CordovaPlugin {
             this.portDiscovery();
             return true;
         } else if (action.equals("printFromBuilder")) {
-            JSONObject params = args.getJSONObject(0);
+            JSONArray params = args.getJSONArray(0);
             String port = args.getString(1);
             this.printFromBuilder(port, params);
             return true;
@@ -200,7 +200,7 @@ public class EPOSPrinter extends CordovaPlugin {
         }
     }
 
-    private void printFromBuilder(final String port, JSONObject params) throws JSONException  {
+    private void printFromBuilder(final String port, JSONArray params) throws JSONException  {
         Print printer = null;
         int[] status = new int[1];
         status[0] = 0;
@@ -233,8 +233,7 @@ public class EPOSPrinter extends CordovaPlugin {
 
     }
 
-    private void pushCommandsToBuilder(Builder builder, JSONObject params) throws JSONException {
-        JSONArray commands = params.getJSONArray("commands");
+    private void pushCommandsToBuilder(Builder builder, JSONArray commands) throws JSONException {
 
         for (int i = 0; i < commands.length(); i++) {
             JSONObject command = commands.getJSONObject(i);
