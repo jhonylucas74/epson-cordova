@@ -210,9 +210,6 @@ public class EPOSPrinter extends CordovaPlugin {
 
     private void printFromBuilder(final String port, JSONArray params) throws JSONException  {
 
-        _callbackContext.success("Printed");
-
-        /*Log.d("myapp", "Passei no Print From Builder");
         Print printer = null;
         int[] status = new int[1];
         status[0] = 0;
@@ -243,7 +240,7 @@ public class EPOSPrinter extends CordovaPlugin {
         } catch (EposException e) {
             Log.d("myapp", Log.getStackTraceString(e));
             _callbackContext.error(e.getStackTrace().toString());
-        }*/
+        }
 
     }
 
