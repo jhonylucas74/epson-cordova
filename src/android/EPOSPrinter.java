@@ -225,6 +225,8 @@ public class EPOSPrinter extends CordovaPlugin {
             printer.closePrinter();
             _callbackContext.success("Printed");
 
+        } catch (JSONException e) {
+            _callbackContext.error("JSON 228: " + e.getMessage());
         } catch (EposException e) {
             _callbackContext.error(e.getMessage());
         }
