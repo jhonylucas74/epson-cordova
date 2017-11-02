@@ -99,7 +99,7 @@ function Builder(options){
         },
         function (error) {
             callback(error)
-        }, 'StarIOPlugin', 'printFromBuilder', args);
+        }, 'StarIOPlugin', 'print', args);
     }
   }
 

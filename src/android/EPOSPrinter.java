@@ -43,15 +43,21 @@ public class EPOSPrinter extends CordovaPlugin {
             String port = args.getString(0);
             this.checkStatus(port, callbackContext);
             return true;
-        } else if (action.equals("portDiscovery")) {
+        }
+
+        if (action.equals("portDiscovery")) {
             this.portDiscovery();
             return true;
-        } else if (action.equals("printFromBuilder")) {
+        }
+
+        if (action.equals("print")) {
             JSONArray params = args.getJSONArray(0);
             String port = args.getString(1);
             this.printFromBuilder(port, params);
             return true;
-        } else {
+        }
+
+        if (action.equals("printTest")) {
             String port = args.getString(0);
             JSONArray texts = args.getJSONArray(1);
             this.printReceipt(port, texts);
