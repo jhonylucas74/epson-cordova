@@ -262,80 +262,94 @@ public class EPOSPrinter extends CordovaPlugin {
     }
 
     private void createImage (Builder builder, JSONObject command)  throws JSONException {
-        String encodedImage = command.getString("image");
 
-        int x = command.getInt("x");
-        int y = command.getInt("y");
-        int width = command.getInt("width");
-        int height = command.getInt("height");
+        try {
+            String encodedImage = command.getString("image");
 
-        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            int x = command.getInt("x");
+            int y = command.getInt("y");
+            int width = command.getInt("width");
+            int height = command.getInt("height");
 
-        builder.addImage(decodedByte, x, y, width, height, Builder.PARAM_DEFAULT,
-                Builder.MODE_MONO, Builder.HALFTONE_DITHER, 1.0,
-                Builder.PARAM_DEFAULT);
+            byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+            builder.addImage(decodedByte, x, y, width, height, Builder.PARAM_DEFAULT,
+                    Builder.MODE_MONO, Builder.HALFTONE_DITHER, 1.0,
+                    Builder.PARAM_DEFAULT);
+
+        } catch (EposException e) {
+
+        }
+
     }
 
 
     private void createText(Builder builder, JSONObject command) throws JSONException {
-        String textToPrint = command.getString("text");
-        JSONObject style = command.getJSONObject("style");
 
-        // font
-        String font = style.getString("font");
+        try {
+            String textToPrint = command.getString("text");
+            JSONObject style = command.getJSONObject("style");
 
-        if (font.equals("FONT_A")) {
-            builder.addTextFont(Builder.FONT_A);
-        } else if (font.equals("FONT_B")) {
-            builder.addTextFont(Builder.FONT_B);
-        } else if (font.equals("FONT_C")) {
-            builder.addTextFont(Builder.FONT_C);
-        } else if (font.equals("FONT_D")) {
-            builder.addTextFont(Builder.FONT_D);
-        } else if (font.equals("FONT_E")) {
-            builder.addTextFont(Builder.FONT_E);
-        } else {
-            builder.addTextFont(Builder.FONT_A);
+            // font
+            String font = style.getString("font");
+
+            if (font.equals("FONT_A")) {
+                builder.addTextFont(Builder.FONT_A);
+            } else if (font.equals("FONT_B")) {
+                builder.addTextFont(Builder.FONT_B);
+            } else if (font.equals("FONT_C")) {
+                builder.addTextFont(Builder.FONT_C);
+            } else if (font.equals("FONT_D")) {
+                builder.addTextFont(Builder.FONT_D);
+            } else if (font.equals("FONT_E")) {
+                builder.addTextFont(Builder.FONT_E);
+            } else {
+                builder.addTextFont(Builder.FONT_A);
+            }
+
+            // Weight
+
+            String weight = style.getString("weight");
+
+            if (weight.equals("bold")) {
+                builder.addTextDouble(Builder.TRUE, Builder.TRUE);
+            } else {
+                builder.addTextDouble(Builder.FALSE, Builder.FALSE);
+            }
+
+            // size
+            int size = style.getInt("size");
+
+            if(size > 8) {
+                size = 8;
+            }
+
+            if (size < 1) {
+                size = 1;
+            }
+
+            builder.addTextSize(size, size);
+
+            // align
+            String alignString = style.getString("align");
+
+            if (alignString.equals("center")) {
+                builder.addTextAlign(Builder.ALIGN_CENTER);
+            }
+            else if (alignString.equals("right")) {
+                builder.addTextAlign(Builder.ALIGN_RIGHT);
+            } else {
+                builder.addTextAlign(Builder.ALIGN_LEFT);
+            }
+
+
+            builder.addText(textToPrint);
+
+        } catch (EposException e) {
+
         }
 
-        // Weight
-
-        String weight = style.getString("weight");
-
-        if (weight.equals("bold")) {
-            builder.addTextDouble(Builder.TRUE, Builder.TRUE);
-        } else {
-            builder.addTextDouble(Builder.FALSE, Builder.FALSE);
-        }
-
-        // size
-        int size = style.getInt("size");
-
-        if(size > 8) {
-            size = 8;
-        }
-
-        if (size < 1) {
-            size = 1;
-        }
-
-        builder.addTextSize(size, size);
-
-        // align
-        String alignString = style.getString("align");
-
-        if (alignString.equals("center")) {
-            builder.addTextAlign(Builder.ALIGN_CENTER);
-        }
-        else if (alignString.equals("right")) {
-            builder.addTextAlign(Builder.ALIGN_RIGHT);
-        } else {
-            builder.addTextAlign(Builder.ALIGN_LEFT);
-        }
-
-
-        builder.addText(textToPrint);
     }
 
 
