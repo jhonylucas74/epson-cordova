@@ -49,7 +49,7 @@ function Builder(options){
       _style.font    = style.font    || 'FONT_A';
       _style.weight  = style.weight  || 'normal';
       _style.align   = style.align   || 'left';
-      _style.bgcolor = sstyle.bgcolor || 'white';
+      _style.bgcolor = style.bgcolor || 'white';
 
       var text = input ? input: '';
       text = text + '\n';
