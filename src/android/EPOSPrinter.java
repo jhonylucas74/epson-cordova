@@ -354,11 +354,19 @@ public class EPOSPrinter extends CordovaPlugin {
 
 
     private void openCashDrawer(Builder builder) {
-        builder.addPulse(Builder.DRAWER_1, Builder.PULSE_100);
+        try {
+            builder.addPulse(Builder.DRAWER_1, Builder.PULSE_100);
+        } catch (EposException e) {
+
+        }
     }
 
     private void cutPaper(Builder builder) {
-        builder.addCut(Builder.CUT_FEED);
+        try {
+            builder.addCut(Builder.CUT_FEED);
+        } catch (EposException e) {
+
+        }
     }
 
 }
