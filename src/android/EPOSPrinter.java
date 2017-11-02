@@ -226,9 +226,9 @@ public class EPOSPrinter extends CordovaPlugin {
             _callbackContext.success("Printed");
 
         } catch (JSONException e) {
-            _callbackContext.error(e.getStackTrace());
+            _callbackContext.error(e.getStackTrace().toString());
         } catch (EposException e) {
-            _callbackContext.error(e.getStackTrace());
+            _callbackContext.error(e.getStackTrace().toString());
         }
 
     }
@@ -343,7 +343,7 @@ public class EPOSPrinter extends CordovaPlugin {
             builder.addText(textToPrint);
 
         } catch (EposException e) {
-            _callbackContext.error(e.getStackTrace());
+            _callbackContext.error(e.getStackTrace().toString());
         }
 
     }
