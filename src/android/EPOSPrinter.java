@@ -236,10 +236,10 @@ public class EPOSPrinter extends CordovaPlugin {
 
         } catch (JSONException e) {
             Log.d("myapp", Log.getStackTraceString(e));
-            _callbackContext.error(e.getStackTrace().toString());
+            _callbackContext.error(e.getMessage().toString());
         } catch (EposException e) {
             Log.d("myapp", Log.getStackTraceString(e));
-            _callbackContext.error(e.getStackTrace().toString());
+            _callbackContext.error(e.getMessage().toString());
         }
 
     }

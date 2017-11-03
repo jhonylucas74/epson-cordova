@@ -65,11 +65,14 @@ function Builder(options){
     };
 
     this.image = function(input, style){
-      var _style     = style          || {};
-      _style.x       = _style.x       || 0;
-      _style.y       = _style.y       || 0;
-      _style.width   = _style.width   || 256;
-      _style.height  = _style.height  || 256;
+       if(!input) return console.error('Can\'t add image to pipe. The input is undefined.')
+
+      style = style || {};
+      var _style     =  {};
+      _style.x       = style.x       || 0;
+      _style.y       = style.y       || 0;
+      _style.width   = style.width   || 256;
+      _style.height  = style.height  || 256;
 
       this.commands.push({
         type: 'image',
