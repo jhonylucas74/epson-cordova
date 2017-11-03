@@ -43,8 +43,9 @@ function Builder(options){
     }
 
     this.text = function(input, style){
+      style = style || {};
       var _style     =  {};
-      _style.size    = style.size    || 4;
+      _style.size    = style.size    || 1;
       _style.color   = style.color   || 'black';
       _style.font    = style.font    || 'FONT_A';
       _style.weight  = style.weight  || 'normal';
