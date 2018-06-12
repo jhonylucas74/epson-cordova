@@ -83,7 +83,7 @@ Full example with 3 lines:
      .text("This is a example", {})
      .text("Say, good bye!", {})
      .cutPaper()
-     .print(portName, function(err, result){
+     .print(deviceName, printerName, function(err, result){
        if (err) return console.log(err);
        // code here...
      });
@@ -104,7 +104,7 @@ Example with shared style:
      .text("I'm center too", myStyle)
      .text("all is center", myStyle)
      .cutPaper()
-     .print(portName, function(err, result){
+     .print(deviceName, printerName, function(err, result){
        if (err) return console.log(err);
        // code here...
      });
@@ -146,7 +146,7 @@ Cut the paper.
 
 Finally for print, just call ``print`` command.
 ```
-builder.print(portName, function(error, result){
+builder.print(deviceName, printerName, function(error, result){
   if (error) {
     console.error(error);
   } else {
