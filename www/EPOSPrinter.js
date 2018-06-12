@@ -96,8 +96,8 @@ function Builder(options){
       return this;
     }
 
-    this.print = function(port, callback){
-        var args = [this.commands, port];
+    this.print = function(port, model, callback){
+        var args = [this.commands, port, model];
 
         exec(function (result) {
             callback(null, result)
