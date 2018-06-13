@@ -53,7 +53,8 @@ public class EPOSPrinter extends CordovaPlugin {
         if (action.equals("print")) {
             JSONArray params = args.getJSONArray(0);
             String port = args.getString(1);
-            this.printFromBuilder(port, params);
+	    String model = args.getString(2);
+            this.printFromBuilder(port, model, params);
             return true;
         }
 
@@ -208,7 +209,7 @@ public class EPOSPrinter extends CordovaPlugin {
         }
     }
 
-    private void printFromBuilder(final String port, JSONArray params) throws JSONException  {
+    private void printFromBuilder(final String port, final String model, JSONArray params) throws JSONException  {
 
         Print printer = null;
         int[] status = new int[1];
@@ -220,7 +221,7 @@ public class EPOSPrinter extends CordovaPlugin {
 
 
             //Initialize a Builder class instance
-            Builder builder = new Builder("TM-T88V", Builder.MODEL_ANK);
+            Builder builder = new Builder(model, Builder.MODEL_ANK);
 
             pushCommandsToBuilder(builder, params);
 
